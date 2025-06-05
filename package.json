@@ -1,8 +1,8 @@
 {
-  "name": "vuetoolkit",
-  "version": "1.0.0",
+  "name": "@wsssoftware/vuetoolkit",
+  "version": "1.0.0-alpha.1",
   "description": "A WSS Software Vue Toolkit",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
