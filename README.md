@@ -1,7 +1,7 @@
 # WSS Software Vue Toolkit
 
 [![npm version](https://img.shields.io/npm/v/@wsssoftware/vuetoolkit.svg)](https://www.npmjs.com/package/@wsssoftware/vuetoolkit)
-[![GitHub license](https://img.shields.io/github/license/wsssoftware/vuetoolkit.svg)](https://github.com/wsssoftware/vuetoolkit/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/wsssoftware/vuetoolkit)](https://github.com/wsssoftware/vuetoolkit/blob/main/LICENSE.md)
 [![GitHub issues](https://img.shields.io/github/issues/wsssoftware/vuetoolkit.svg)](https://github.com/wsssoftware/vuetoolkit/issues)
 
 A modern toolkit of components and utilities for Vue.js applications, developed by WSS Software.
