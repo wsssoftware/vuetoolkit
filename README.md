@@ -6,6 +6,9 @@
 
 A modern toolkit of components and utilities for Vue.js applications, developed by WSS Software.
 
+> [!IMPORTANT]  
+> This project will work only with `VueJs 3` and `Tailwind 4`
+
 ## 📦 Installation
 
 ```bash
