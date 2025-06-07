@@ -15,6 +15,14 @@ A modern toolkit of components and utilities for Vue.js applications, developed 
 npm install @wsssoftware/vuetoolkit
 ```
 
+For Tailwind apply package styles you must define:
+
+```css
+@import "tailwindcss";
+
+@source "../../node_modules/@wsssoftware/**/*.{ts,js,vue,ts}";
+```
+
 ## 🚀 Usage
 
 ```javascript
