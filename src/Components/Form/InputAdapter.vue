@@ -1,9 +1,11 @@
 <template>
     <div v-if="asDiv">
-        <slot :disabled="disabled" :error="error" :id="finalId" :invalid="invalid" :required="required" />
+        <slot :disabled="disabled" :error="error" :id="finalId" :invalid="invalid" :readonly="readonly"
+              :required="required" />
     </div>
     <template v-else>
-        <slot :disabled="disabled" :error="error" :id="finalId" :invalid="invalid" :required="required" />
+        <slot :disabled="disabled" :error="error" :id="finalId" :invalid="invalid" :readonly="readonly"
+              :required="required" />
     </template>
 </template>
 
@@ -20,6 +22,7 @@ export default defineComponent({
         fieldName: { type: String, required: true },
         form: { type: Object as PropType<InertiaForm<{ [key: string]: any }>>, required: true },
         id: String,
+        readonly: Boolean,
         required: Boolean
     },
     computed: {
