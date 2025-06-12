@@ -26,12 +26,12 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { Link as InertiaLink } from '@inertiajs/vue3';
 
 export default defineComponent({
     name: 'Link',
     components: {
-        InertiaLink: Link
+        InertiaLink
     },
     props: {
         blank: Boolean,
