@@ -56,7 +56,8 @@ export default defineComponent({
         date.setFullYear(date.getFullYear() + 5);
         let options = {
             domain: domain,
-            expires: date
+            expires: date,
+            path: '/'
         };
         let cookies = new Cookies(null, options);
         let value = cookies.get(cookieName);
