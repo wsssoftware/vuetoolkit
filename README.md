@@ -8,6 +8,9 @@ A modern toolkit of components and utilities for Vue.js applications, developed 
 
 > [!IMPORTANT]  
 > This project will work only with `VueJs 3` and `Tailwind 4`
+>
+> Some features from this package work in association with the
+> package [laraveltookit](https://github.com/wsssoftware/laraveltoolkit). For mor information read it's related docs.
 
 ## 📦 Installation
 
