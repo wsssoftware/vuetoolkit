@@ -14,10 +14,3 @@ export default {
         app.config.globalProperties.$gate = new Gate();
     }
 };
-
-declare module '@vue/runtime-core' {
-    interface ComponentCustomProperties {
-        $vuetoolkit: Options;
-        $gate: Gate;
-    }
-}
