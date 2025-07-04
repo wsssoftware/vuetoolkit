@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { debounce } from 'lodash-es';
-import { onBeforeUnmount, onMounted, onUpdated } from 'vue';
+import { onBeforeUnmount, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
 import { ToastServiceMethods } from 'primevue';
 
@@ -12,12 +12,11 @@ export default function(toast: ToastServiceMethods): void {
     let finishEvent: () => void;
     toastService = toast;
     onMounted(() => {
-        finishEvent = router.on('finish', () => {
-            getFlashMessages();
+        finishEvent = router.on('finish', (e) => {
+            if (e.detail.visit.only.length === 0) {
+                getFlashMessages();
+            }
         });
-        getFlashMessages();
-    });
-    onUpdated(() => {
         getFlashMessages();
     });
     onBeforeUnmount(() => {

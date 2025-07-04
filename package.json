@@ -12,6 +12,7 @@
   "author": "Allan Carvalho",
   "license": "MIT",
   "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
     "@vue/runtime-core": "^3.5.16"
   },
   "dependencies": {

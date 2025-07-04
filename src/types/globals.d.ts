@@ -7,6 +7,7 @@ declare global {
     function route(name: string, params?: RouteParams<typeof name> | undefined, absolute?: boolean): string;
 
     interface Window {
+        route: typeof routeFn;
         axios: AxiosInstance;
     }
 }
