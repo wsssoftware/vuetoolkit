@@ -3,6 +3,10 @@ type Image = {
     url: string
 }
 
+export type OnlyValuesUserPermissions = {
+    [key: string]: boolean
+} | null
+
 export interface SEOEntity {
     title?: string,
     description?: string,
@@ -45,3 +49,15 @@ export type Paginator<T> = {
     to: number,
     total: number,
 }
+
+export type UserPermissions = {
+    id: string,
+    policy_column: string,
+    policy_name: string,
+    policy_description: null | string,
+    rule_key: string,
+    rule_name: string,
+    rule_description: null | string,
+    rule_deny_status: null | number,
+    rule_value: boolean,
+}[]
