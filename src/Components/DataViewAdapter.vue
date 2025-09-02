@@ -8,11 +8,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import { DataViewPageEvent } from 'primevue/dataview';
-import { DataTableFilterMeta, DataTableFilterMetaData } from 'primevue/datatable';
 import { router } from '@inertiajs/vue3';
 import { debounce } from 'lodash-es';
+import { DataTableFilterMeta, DataTableFilterMetaData } from 'primevue/datatable';
+import { DataViewPageEvent } from 'primevue/dataview';
+import { defineComponent, PropType } from 'vue';
 import { Paginator } from '../types/Model';
 
 export default defineComponent({
@@ -20,26 +20,26 @@ export default defineComponent({
     props: {
         filters: {
             type: Object as PropType<DataTableFilterMeta>,
-            default: {}
+            default: {},
         },
         filterDebounceWait: {
             type: Number,
-            default: 700
+            default: 700,
         },
         globalFilterName: {
             type: String,
-            default: 'global'
+            default: 'global',
         },
         propName: {
             type: String,
-            required: true
+            required: true,
         },
         rows: {
             type: Number,
-            default: 15
+            default: 15,
         },
         sortField: String,
-        sortOrder: String as PropType<'asc' | 'desc'>
+        sortOrder: String as PropType<'asc' | 'desc'>,
     },
     emits: ['update:filters'],
     computed: {
@@ -48,7 +48,7 @@ export default defineComponent({
         },
         pageName(): string {
             return this.paginator?.page_name ?? 'page';
-        }
+        },
     },
     data() {
         return {
@@ -56,7 +56,7 @@ export default defineComponent({
                 this.onFilter();
             }, this.filterDebounceWait),
             loading: false,
-            page: 1
+            page: 1,
         };
     },
     beforeMount() {
@@ -91,7 +91,7 @@ export default defineComponent({
                 sort = `${this.sortField}:${this.sortOrder}`;
             }
             if (this.filters) {
-                Object.keys(this.filters).forEach(key => {
+                Object.keys(this.filters).forEach((key) => {
                     let filter = this.filters[key] as DataTableFilterMetaData;
                     if (!!filter.value) {
                         filters[key] = filter;
@@ -102,7 +102,7 @@ export default defineComponent({
                 rows: this.rows,
                 sort: sort,
                 filters: Object.keys(filters).length > 0 ? filters : undefined,
-                global_filter_name: this.globalFilterName
+                global_filter_name: this.globalFilterName,
             };
             data[this.pageName] = undefined;
             if (this.page !== 1) {
@@ -115,9 +115,9 @@ export default defineComponent({
                 data: data,
                 replace: true,
                 async: false,
-                onSuccess: () => this.loading = false
+                onSuccess: () => (this.loading = false),
             });
-        }
+        },
     },
     watch: {
         page() {
@@ -137,12 +137,10 @@ export default defineComponent({
             deep: true,
             handler() {
                 this.debouncedFilter();
-            }
-        }
-    }
+            },
+        },
+    },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

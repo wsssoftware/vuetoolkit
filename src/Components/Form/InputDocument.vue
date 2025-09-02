@@ -1,31 +1,26 @@
 <template>
-    <InputMask
-        ref="input"
-        :auto-clear="false"
-        v-model="value"
-        :mask="mask"
-    />
+    <InputMask ref="input" :auto-clear="false" v-model="value" :mask="mask" />
 </template>
 
 <script lang="ts">
-import { ComponentInstance, defineComponent, nextTick, PropType } from 'vue';
 import { InputMask } from 'primevue';
+import { ComponentInstance, defineComponent, nextTick, PropType } from 'vue';
 
-export type DocumentTypes = 'cpf' | 'cnpj'
+export type DocumentTypes = 'cpf' | 'cnpj';
 
 export default defineComponent({
     name: 'InputDocument',
     components: {
-        InputMask
+        InputMask,
     },
     props: {
         modelValue: {
-            type: String
+            type: String,
         },
         allowed: {
             type: Array as PropType<DocumentTypes[]>,
-            default: ['cpf', 'cnpj']
-        }
+            default: ['cpf', 'cnpj'],
+        },
     },
     emits: ['update:modelValue'],
     computed: {
@@ -35,12 +30,12 @@ export default defineComponent({
             },
             set(value: string) {
                 this.$emit('update:modelValue', value);
-            }
-        }
+            },
+        },
     },
     data() {
         return {
-            mask: this.guessMask(this.modelValue)
+            mask: this.guessMask(this.modelValue),
         };
     },
     methods: {
@@ -53,7 +48,7 @@ export default defineComponent({
                 return '99.999.999/9999-99';
             }
             throw new Error('Allowed cpf and/or cnpj required.');
-        }
+        },
     },
     watch: {
         value(newValue: string) {
@@ -75,11 +70,9 @@ export default defineComponent({
                     input.setSelectionRange(pos, pos);
                 }, 100);
             });
-        }
-    }
+        },
+    },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

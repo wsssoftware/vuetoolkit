@@ -18,5 +18,5 @@ function handle(el: HTMLElement, binding: DirectiveBinding): void {
 
 export default {
     beforeMount: handle,
-    updated: handle
+    updated: handle,
 };

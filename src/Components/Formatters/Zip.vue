@@ -14,7 +14,7 @@ export default defineComponent({
     name: 'Zip',
     props: {
         asTemplate: Boolean,
-        value: String
+        value: String,
     },
     computed: {
         finalValue(): string {
@@ -27,11 +27,9 @@ export default defineComponent({
         fFinalValue(): string {
             let value = this.finalValue;
             return `${value.substring(0, 2)}.${value.substring(2, 5)}-${value.substring(5, 8)}`;
-        }
-    }
+        },
+    },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -16,7 +16,7 @@ export default defineComponent({
         asTemplate: Boolean,
         locale: String,
         options: Object as PropType<Intl.DateTimeFormatOptions>,
-        value: String
+        value: String,
     },
     computed: {
         finalValue(): string {
@@ -27,13 +27,10 @@ export default defineComponent({
             return this.value ?? fallback;
         },
         fFinalValue(): string {
-            return new Date(this.finalValue)
-                .toLocaleString(this.locale ?? this.$vuetoolkit.locale, this.options ?? {});
-        }
-    }
+            return new Date(this.finalValue).toLocaleString(this.locale ?? this.$vuetoolkit.locale, this.options ?? {});
+        },
+    },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,16 +1,11 @@
 <template>
-    <slot
-        :faIcon="faIcon"
-        :label="label"
-        :next="next"
-        :state="state"
-    />
+    <slot :faIcon="faIcon" :label="label" :next="next" :state="state" />
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
-import Cookies from 'universal-cookie';
 import { usePreferredDark } from '@vueuse/core';
+import Cookies from 'universal-cookie';
+import { defineComponent, PropType, ref } from 'vue';
 
 const cookieName = 'vuetoolkit-color-scheme';
 
@@ -20,16 +15,16 @@ export default defineComponent({
         domain: String,
         fontAwesomeStyle: {
             type: String,
-            default: 'far'
+            default: 'far',
         },
         labels: {
-            type: Object as PropType<{ auto: string, light: string, dark: string }>,
+            type: Object as PropType<{ auto: string; light: string; dark: string }>,
             default: () => ({
                 auto: 'Tema do sistema',
                 light: 'Tema claro',
-                dark: 'Tema escuro'
-            })
-        }
+                dark: 'Tema escuro',
+            }),
+        },
     },
     computed: {
         faIcon(): string {
@@ -45,7 +40,7 @@ export default defineComponent({
         },
         label(): string {
             return this.labels[this.state as 'auto' | 'light' | 'dark'];
-        }
+        },
     },
     setup(props) {
         let domain = props.domain;
@@ -57,7 +52,7 @@ export default defineComponent({
         let options = {
             domain: domain,
             expires: date,
-            path: '/'
+            path: '/',
         };
         let cookies = new Cookies(null, options);
         let value = cookies.get(cookieName);
@@ -68,7 +63,7 @@ export default defineComponent({
         const state = ref(value);
         return {
             state: state,
-            cookies
+            cookies,
         };
     },
     created(): any {
@@ -92,9 +87,7 @@ export default defineComponent({
             } else if (this.state === 'light') {
                 this.setLight();
             } else {
-                usePreferredDark().value
-                    ? this.setDark()
-                    : this.setLight();
+                usePreferredDark().value ? this.setDark() : this.setLight();
             }
         },
         setLight(): void {
@@ -104,11 +97,9 @@ export default defineComponent({
         setDark(): void {
             document.documentElement.classList.add('dark');
             document.documentElement.classList.remove('light');
-        }
-    }
+        },
+    },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

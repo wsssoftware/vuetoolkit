@@ -1,6 +1,8 @@
 import { AxiosInstance } from 'axios';
 import { ConfirmationServiceMethods, DialogServiceMethods } from 'primevue';
 import { route as routeFn, RouteParams, Router } from 'ziggy-js';
+import { Numbers } from '../Composables';
+import Gate from '../Gate';
 
 declare global {
     function route(): Router;
@@ -23,7 +25,8 @@ declare module '@vue/runtime-core' {
         route: typeof routeFn;
         $toast: ToastServiceMethods;
         $confirm: ConfirmationServiceMethods;
+        $gate: Gate;
         $dialog: DialogServiceMethods;
+        $numbers: Numbers;
     }
 }
-

@@ -1,6 +1,5 @@
 <template>
-    <label :for="id"
-           :class="[invalid ? '!text-red-500 dark:!text-red-400' : '', disabled ? 'opacity-80' : '']">
+    <label :for="id" :class="[invalid ? '!text-red-500 dark:!text-red-400' : '', disabled ? 'opacity-80' : '']">
         <slot />
         <span v-if="required" class="text-red-500 dark:text-red-400">﹡</span>
     </label>
@@ -15,11 +14,9 @@ export default defineComponent({
         disabled: Boolean,
         id: { type: String, required: true },
         invalid: Boolean,
-        required: Boolean
-    }
+        required: Boolean,
+    },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

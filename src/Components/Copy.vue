@@ -1,19 +1,19 @@
 <template>
     <button ref="button" v-tooltip.focus.top="copiedFeedback" @click="buttonClick">
-        <slot/>
+        <slot />
     </button>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import Tooltip from "primevue/tooltip";
+import Tooltip from 'primevue/tooltip';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: "Copy",
+    name: 'Copy',
     props: {
         copiedFeedback: {
             type: String,
-            default: "Copied!",
+            default: 'Copied!',
         },
         feedbackTimeout: {
             type: Number,
@@ -36,26 +36,27 @@ export default defineComponent({
             }
         },
         copy(): void {
-            navigator.clipboard.writeText(this.value).then(() => {
-                this.$emit('copied', this.value);
-            }).catch((err) => {
-                console.error("Erro ao copiar: ", err);
-                this.copyFallback();
-            });
+            navigator.clipboard
+                .writeText(this.value)
+                .then(() => {
+                    this.$emit('copied', this.value);
+                })
+                .catch((err) => {
+                    console.error('Erro ao copiar: ', err);
+                    this.copyFallback();
+                });
         },
         copyFallback(): void {
-            const textarea = document.createElement("textarea");
+            const textarea = document.createElement('textarea');
             textarea.value = this.value;
             document.body.appendChild(textarea);
             textarea.select();
-            document.execCommand("copy");
+            document.execCommand('copy');
             document.body.removeChild(textarea);
-            console.log("Copied using old method!");
-        }
+            console.log('Copied using old method!');
+        },
     },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

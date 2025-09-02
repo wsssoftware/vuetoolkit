@@ -19,16 +19,16 @@ export default defineComponent({
     props: {
         rule: {
             type: String as PropType<'allows' | 'denies' | 'any' | 'none'>,
-            required: true
+            required: true,
         },
         abilities: {
             type: [String, Array] as PropType<string | string[]>,
-            required: true
+            required: true,
         },
         rootElement: {
             type: String,
-            default: 'div'
-        }
+            default: 'div',
+        },
     },
     computed: {
         hasAttrs(): boolean {
@@ -48,11 +48,9 @@ export default defineComponent({
             } else {
                 return this.$gate.none(this.abilities);
             }
-        }
-    }
+        },
+    },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

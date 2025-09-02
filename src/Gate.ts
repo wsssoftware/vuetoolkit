@@ -1,9 +1,9 @@
 import { usePage } from '@inertiajs/vue3';
 
 export default class Gate {
-
     permissions(ability: string): boolean {
-        let permissions: OnlyValuesUserPermissions | undefined | null = (usePage().props.auth as any).acl as OnlyValuesUserPermissions;
+        let permissions: OnlyValuesUserPermissions | undefined | null = (usePage().props.auth as any)
+            .acl as OnlyValuesUserPermissions;
         if (permissions === undefined) {
             console.warn('Before use Gate on frontend you must set acl property on HandleInertiaRequests');
         }
@@ -46,9 +46,8 @@ export default class Gate {
     none(abilities: string | string[]): boolean {
         return !this.any(abilities);
     }
-
 }
 
 export type OnlyValuesUserPermissions = {
-    [key: string]: boolean
-} | null
+    [key: string]: boolean;
+} | null;

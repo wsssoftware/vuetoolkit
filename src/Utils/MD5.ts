@@ -1,5 +1,4 @@
 export default class MD5 {
-
     static hexArray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
 
     static hash(string) {
@@ -80,23 +79,23 @@ export default class MD5 {
         c = MD5.ii(c, d, a, b, k[2], 15, 718787259);
         b = MD5.ii(b, c, d, a, k[9], 21, -343485551);
 
-        x[0] = a + x[0] & 0xFFFFFFFF;
-        x[1] = b + x[1] & 0xFFFFFFFF;
-        x[2] = c + x[2] & 0xFFFFFFFF;
-        x[3] = d + x[3] & 0xFFFFFFFF;
+        x[0] = (a + x[0]) & 0xffffffff;
+        x[1] = (b + x[1]) & 0xffffffff;
+        x[2] = (c + x[2]) & 0xffffffff;
+        x[3] = (d + x[3]) & 0xffffffff;
     }
 
     static cmn(q, a, b, x, s, t) {
-        a = (a + q & 0xFFFFFFFF) + (x + t & 0xFFFFFFFF) & 0xFFFFFFFF;
-        return (a << s | a >>> 32 - s) + b & 0xFFFFFFFF;
+        a = (((a + q) & 0xffffffff) + ((x + t) & 0xffffffff)) & 0xffffffff;
+        return (((a << s) | (a >>> (32 - s))) + b) & 0xffffffff;
     }
 
     static ff(a, b, c, d, x, s, t) {
-        return MD5.cmn(b & c | ~b & d, a, b, x, s, t);
+        return MD5.cmn((b & c) | (~b & d), a, b, x, s, t);
     }
 
     static gg(a, b, c, d, x, s, t) {
-        return MD5.cmn(b & d | c & ~d, a, b, x, s, t);
+        return MD5.cmn((b & d) | (c & ~d), a, b, x, s, t);
     }
 
     static hh(a, b, c, d, x, s, t) {
@@ -141,17 +140,21 @@ export default class MD5 {
         let i = 0;
 
         for (i; i < 64; i += 4) {
-            md5blks[i >> 2] = s.charCodeAt(i) + (s.charCodeAt(i + 1) << 8) + (s.charCodeAt(i + 2) << 16) + (s.charCodeAt(i + 3) << 24);
+            md5blks[i >> 2] =
+                s.charCodeAt(i) +
+                (s.charCodeAt(i + 1) << 8) +
+                (s.charCodeAt(i + 2) << 16) +
+                (s.charCodeAt(i + 3) << 24);
         }
         return md5blks;
     }
 
     static rhex(n) {
         let s = '';
-        s += MD5.hexArray[n >> 4 & 0x0F] + MD5.hexArray[n >> 0 & 0x0F];
-        s += MD5.hexArray[n >> 12 & 0x0F] + MD5.hexArray[n >> 8 & 0x0F];
-        s += MD5.hexArray[n >> 20 & 0x0F] + MD5.hexArray[n >> 16 & 0x0F];
-        s += MD5.hexArray[n >> 28 & 0x0F] + MD5.hexArray[n >> 24 & 0x0F];
+        s += MD5.hexArray[(n >> 4) & 0x0f] + MD5.hexArray[(n >> 0) & 0x0f];
+        s += MD5.hexArray[(n >> 12) & 0x0f] + MD5.hexArray[(n >> 8) & 0x0f];
+        s += MD5.hexArray[(n >> 20) & 0x0f] + MD5.hexArray[(n >> 16) & 0x0f];
+        s += MD5.hexArray[(n >> 28) & 0x0f] + MD5.hexArray[(n >> 24) & 0x0f];
         return s;
     }
 

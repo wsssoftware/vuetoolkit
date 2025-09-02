@@ -1,6 +1,6 @@
 <template>
     <slot
-        :first="1 + ((page - 1) * rows)"
+        :first="1 + (page - 1) * rows"
         :currentSort="sort ?? []"
         :loading="loading"
         :filter="onFilter"
@@ -13,26 +13,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, PropType } from 'vue';
+import { router } from '@inertiajs/vue3';
+import Cookies from 'js-cookie';
+import { debounce } from 'lodash-es';
 import {
     DataTableFilterEvent,
     DataTableFilterMeta,
     DataTablePageEvent,
     DataTableSortEvent,
-    DataTableSortMeta
+    DataTableSortMeta,
 } from 'primevue/datatable';
-import { router } from '@inertiajs/vue3';
-import { debounce } from 'lodash-es';
-import Cookies from 'js-cookie';
+import { defineComponent, nextTick, PropType } from 'vue';
 import { Paginator } from '../types/Model';
 import MD5 from '../Utils/MD5';
 
-
 type PreserveData = {
-    sort: DataTableSortMeta[] | undefined,
-    filters: DataTableFilterMeta,
-    page: number,
-}
+    sort: DataTableSortMeta[] | undefined;
+    filters: DataTableFilterMeta;
+    page: number;
+};
 
 export default defineComponent({
     name: 'DataTableAdapter',
@@ -40,21 +39,21 @@ export default defineComponent({
         filters: Object as PropType<DataTableFilterMeta>,
         globalFilterName: {
             type: String,
-            default: 'global'
+            default: 'global',
         },
         manualFilterDebounceWait: {
             type: Number,
-            default: 700
+            default: 700,
         },
         propName: {
             type: String,
-            required: true
+            required: true,
         },
         preserveState: Boolean,
         rows: {
             type: Number,
-            default: 15
-        }
+            default: 15,
+        },
     },
     emits: ['update:filters'],
     computed: {
@@ -70,14 +69,14 @@ export default defineComponent({
             set(value: DataTableFilterMeta) {
                 this.lFilters = value;
                 this.$emit('update:filters', value);
-            }
+            },
         },
         paginator(): Paginator<any> | undefined {
             return this.$page.props[this.propName] as Paginator<any> | undefined;
         },
         pageName(): string {
             return this.paginator?.page_name ?? 'page';
-        }
+        },
     },
     data() {
         return {
@@ -90,7 +89,7 @@ export default defineComponent({
             page: 1,
             sort: [] as DataTableSortMeta[] | undefined,
             cancelToken: null as null | (() => void),
-            preservedGot: false
+            preservedGot: false,
         };
     },
     beforeMount() {
@@ -141,14 +140,16 @@ export default defineComponent({
             let data: { [key: string]: any } = {};
             let sort = undefined;
             if (this.sort && this.sort.length > 0) {
-                sort = this.sort?.map((i: DataTableSortMeta) => `${i.field}:${i.order === 1 ? 'asc' : 'desc'}`).join(',');
+                sort = this.sort
+                    ?.map((i: DataTableSortMeta) => `${i.field}:${i.order === 1 ? 'asc' : 'desc'}`)
+                    .join(',');
             }
             nextTick(() => {
                 data[`${this.pageName}-options`] = {
                     rows: this.rows,
                     sort: sort,
                     filters: Object.keys(this.localFilters).length > 0 ? this.localFilters : undefined,
-                    global_filter_name: this.globalFilterName
+                    global_filter_name: this.globalFilterName,
                 };
                 data[this.pageName] = undefined;
                 if (this.page !== 1) {
@@ -166,30 +167,25 @@ export default defineComponent({
                     data: data,
                     replace: true,
                     async: false,
-                    onSuccess: () => this.loading = false,
+                    onSuccess: () => (this.loading = false),
                     onFinish: () => {
                         this.cancelToken = null;
-                    }
+                    },
                 });
             });
-
         },
         remember(): void {
             if (this.preserveState && this.preservedGot) {
                 let data: PreserveData = {
                     filters: this.lFilters,
                     sort: this.sort,
-                    page: this.page
+                    page: this.page,
                 };
                 let expire = new Date();
                 expire.setHours(expire.getHours() + 2);
-                Cookies.set(
-                    this.preserveStateKey,
-                    JSON.stringify(data),
-                    { expires: expire }
-                );
+                Cookies.set(this.preserveStateKey, JSON.stringify(data), { expires: expire });
             }
-        }
+        },
     },
     watch: {
         page() {
@@ -203,12 +199,10 @@ export default defineComponent({
             deep: true,
             handler() {
                 this.load();
-            }
-        }
-    }
+            },
+        },
+    },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

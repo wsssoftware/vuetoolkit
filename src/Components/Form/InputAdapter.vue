@@ -1,18 +1,27 @@
 <template>
     <div v-if="asDiv">
-        <slot :disabled="disabled" :error="error" :id="finalId" :invalid="invalid" :readonly="readonly"
-              :required="required" />
+        <slot
+            :disabled="disabled"
+            :error="error"
+            :id="finalId"
+            :invalid="invalid"
+            :readonly="readonly"
+            :required="required" />
     </div>
-    <template v-else>
-        <slot :disabled="disabled" :error="error" :id="finalId" :invalid="invalid" :readonly="readonly"
-              :required="required" />
-    </template>
+    <slot
+        v-else
+        :disabled="disabled"
+        :error="error"
+        :id="finalId"
+        :invalid="invalid"
+        :readonly="readonly"
+        :required="required" />
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import { v4 as UUIDv4 } from 'uuid';
 import { InertiaForm } from '@inertiajs/vue3';
+import { v4 as UUIDv4 } from 'uuid';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
     name: 'InputAdapter',
@@ -23,7 +32,7 @@ export default defineComponent({
         form: { type: Object as PropType<InertiaForm<{ [key: string]: any }>>, required: true },
         id: String,
         readonly: Boolean,
-        required: Boolean
+        required: Boolean,
     },
     computed: {
         error(): undefined | string {
@@ -34,11 +43,9 @@ export default defineComponent({
         },
         invalid(): boolean {
             return !!this.form.errors[this.fieldName as keyof typeof this.form.errors];
-        }
-    }
+        },
+    },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
