@@ -1,9 +1,9 @@
 <template>
     <template v-if="asTemplate">
-        {{ fFinalValue }}
+        {{ $formatters.datetime.datetime(finalValue) }}
     </template>
     <time v-else :datetime="finalValue">
-        {{ fFinalValue }}
+        {{ $formatters.datetime.datetime(finalValue) }}
     </time>
 </template>
 
@@ -25,9 +25,6 @@ export default defineComponent({
                 fallback = this.$slots?.default()[0].children as string;
             }
             return this.value ?? fallback;
-        },
-        fFinalValue(): string {
-            return new Date(this.finalValue).toLocaleString(this.locale ?? this.$vuetoolkit.locale, this.options ?? {});
         },
     },
 });

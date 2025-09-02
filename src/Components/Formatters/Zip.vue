@@ -1,9 +1,9 @@
 <template>
     <template v-if="asTemplate">
-        {{ fFinalValue }}
+        {{ $formatters.brazilian.zip(finalValue) }}
     </template>
     <span v-else>
-        {{ fFinalValue }}
+        {{ $formatters.brazilian.zip(finalValue) }}
     </span>
 </template>
 
@@ -22,11 +22,7 @@ export default defineComponent({
             if (typeof this.$slots.default === 'function' && this.$slots.default()[0] !== undefined) {
                 fallback = this.$slots?.default()[0].children as string;
             }
-            return (this.value ?? fallback).replace(/[^0-9]/g, '');
-        },
-        fFinalValue(): string {
-            let value = this.finalValue;
-            return `${value.substring(0, 2)}.${value.substring(2, 5)}-${value.substring(5, 8)}`;
+            return this.value ?? fallback;
         },
     },
 });

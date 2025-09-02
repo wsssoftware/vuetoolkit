@@ -1,19 +1,21 @@
 <template>
     <template v-if="asTemplate">
-        {{ $formatters.brazilian.document(finalValue) }}
+        {{ $formatters.datetime.time(finalValue) }}
     </template>
-    <span v-else>
-        {{ $formatters.brazilian.document(finalValue) }}
-    </span>
+    <time v-else :datetime="finalValue">
+        {{ $formatters.datetime.time(finalValue) }}
+    </time>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
-    name: 'BrazilianDocument',
+    name: 'Time',
     props: {
         asTemplate: Boolean,
+        locale: String,
+        options: Object as PropType<Intl.DateTimeFormatOptions>,
         value: String,
     },
     computed: {
