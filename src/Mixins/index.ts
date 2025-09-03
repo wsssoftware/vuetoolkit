@@ -1,1 +1,1 @@
-export { default as FormModelMixin } from './FormModelMixin.vue';
+export { default as BaseFormInput } from './BaseFormInput.vue';

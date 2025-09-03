@@ -21,6 +21,23 @@ class Brazilian {
         return raw;
     }
 
+    phone(phone: string): string {
+        const raw = phone.replace(/[^0-9]/g, '');
+
+        if (raw.length === 3 && /^1[0-9]{2}$/.test(raw)) {
+            return raw;
+        } else if (/^[1-9][0-9]9$/.test(raw.substring(0, 3))) {
+            return `(${raw.substring(0, 2)}) ${phone.substring(3, 2)}  ${phone.substring(3, 7)}-${phone.substring(7, 11)}`;
+        } else if (/^400$/.test(phone.substring(0, 3))) {
+            return `${phone.substring(0, 4)}-${phone.substring(4, 8)}`;
+        } else if (/^0[3589]00$/.test(phone.substring(0, 4))) {
+            return `${phone.substring(0, 4)}-${phone.substring(4, 7)}-${phone.substring(7, 11)}`;
+        } else if (/^[1-9][0-9][1-5][0-9]$/.test(phone.substring(0, 4))) {
+            return `(${phone.substring(0, 2)}) ${phone.substring(2, 6)}-${phone.substring(6, 10)}`;
+        }
+        return phone;
+    }
+
     zip(zip: string): string {
         const raw = zip.replace(/[^0-9]/g, '');
         return `${raw.substring(0, 2)}.${raw.substring(2, 5)}-${raw.substring(5, 8)}`;

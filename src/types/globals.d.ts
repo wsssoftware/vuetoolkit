@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { ConfirmationServiceMethods, DialogServiceMethods } from 'primevue';
 import { route as routeFn, RouteParams, Router } from 'ziggy-js';
-import { Numbers } from '../Composables';
+import { Formatters } from '../Composables';
 import Gate from '../Gate';
 
 declare global {
@@ -27,6 +27,6 @@ declare module '@vue/runtime-core' {
         $confirm: ConfirmationServiceMethods;
         $gate: Gate;
         $dialog: DialogServiceMethods;
-        $numbers: Numbers;
+        $formatters: Formatters;
     }
 }
