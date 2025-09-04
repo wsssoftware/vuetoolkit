@@ -27,15 +27,17 @@ export default function (toast: ToastServiceMethods): void {
 }
 
 const getFlashMessages = debounce(() => {
-    axios.get(route('lt.flash.get_messages')).then((response: AxiosResponse<Message[]>) => {
-        response.data.forEach((message: Message) => {
-            if (alreadyFlashed.filter((id: string) => id === message.id).length > 0) {
-                return;
-            }
-            toastService.add(message);
-            alreadyFlashed.push(message.id);
+    setTimeout(() => {
+        axios.get(route('lt.flash.get_messages')).then((response: AxiosResponse<Message[]>) => {
+            response.data.forEach((message: Message) => {
+                if (alreadyFlashed.filter((id: string) => id === message.id).length > 0) {
+                    return;
+                }
+                toastService.add(message);
+                alreadyFlashed.push(message.id);
+            });
         });
-    });
+    }, 1000);
 });
 
 export type Message = {
