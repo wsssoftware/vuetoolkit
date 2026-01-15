@@ -11,7 +11,16 @@ let toastService: ToastServiceMethods;
 export default function (toast: ToastServiceMethods): void {
     let finishEvent: () => void;
     toastService = toast;
+    let interceptorId: any;
     onMounted(() => {
+        interceptorId = axios.interceptors.response.use((response: AxiosResponse) => {
+            const isInertia = response.headers['x-inertia'];
+            const isGetFlash = response.request.responseURL === route('lt.flash.get_messages');
+            if (!isInertia && !isGetFlash) {
+                getFlashMessages();
+            }
+            return response;
+        });
         finishEvent = router.on('finish', (e) => {
             if (e.detail.visit.only.length === 0) {
                 getFlashMessages();
@@ -20,6 +29,9 @@ export default function (toast: ToastServiceMethods): void {
         getFlashMessages();
     });
     onBeforeUnmount(() => {
+        if (interceptorId) {
+            axios.interceptors.response.eject(interceptorId);
+        }
         if (finishEvent) {
             finishEvent();
         }
