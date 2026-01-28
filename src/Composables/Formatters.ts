@@ -72,4 +72,41 @@ class Numbers {
     number(value: number, options: Intl.NumberFormatOptions = {}): string {
         return value.toLocaleString(this.locale, options);
     }
+    percentage(value: number, maximumFractionDigits: number = 2): string {
+        return value.toLocaleString(this.locale, {
+            style: 'percent',
+            maximumFractionDigits: maximumFractionDigits,
+        });
+    }
+
+    size(
+        bytes: number,
+        unitDisplay: 'short' | 'long' | 'narrow' | undefined = 'short',
+        maximumFractionDigits: number = 2,
+    ): string {
+        const units = [
+            'byte',
+            'kilobyte',
+            'megabyte',
+            'gigabyte',
+            'terabyte',
+            'petabyte',
+            'exabyte',
+            'zettabyte',
+            'yottabyte',
+        ];
+        let i = 0;
+
+        while (bytes >= 1024 && i < units.length - 1) {
+            bytes /= 1024;
+            i++;
+        }
+
+        return bytes.toLocaleString(this.locale, {
+            style: 'unit',
+            unit: units[i],
+            unitDisplay: unitDisplay,
+            maximumFractionDigits: maximumFractionDigits,
+        });
+    }
 }
