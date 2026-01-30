@@ -49,6 +49,7 @@ export default defineComponent({
             type: String,
             required: true,
         },
+        preserveScroll: { type: Boolean, default: true },
         preserveState: Boolean,
         rows: {
             type: Number,
@@ -80,6 +81,8 @@ export default defineComponent({
     },
     data() {
         return {
+            scrollX: 0,
+            scrollY: 0,
             lFilters: {} as DataTableFilterMeta,
             debouncedFilter: debounce((filters: any) => {
                 this.localFilters = filters;
@@ -136,6 +139,8 @@ export default defineComponent({
             this.remember();
         },
         load(): void {
+            this.scrollX = window.scrollX;
+            this.scrollY = window.scrollY;
             this.loading = true;
             let data: { [key: string]: any } = {};
             let sort = undefined;
@@ -169,6 +174,11 @@ export default defineComponent({
                     async: false,
                     onSuccess: () => (this.loading = false),
                     onFinish: () => {
+                        if (this.preserveScroll) {
+                            nextTick(() => {
+                                window.scrollTo(this.scrollX, this.scrollY); // x, y
+                            });
+                        }
                         this.cancelToken = null;
                     },
                 });
