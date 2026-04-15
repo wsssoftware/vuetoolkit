@@ -12,6 +12,14 @@ A modern toolkit of components and utilities for Vue.js applications, developed 
 > Some features from this package work in association with the
 > package [laraveltookit](https://github.com/wsssoftware/laraveltoolkit). For mor information read it's related docs.
 
+## Compatibility
+
+| Package Version | LaravelToolkit Version | Inertia Version |
+|-----------------|------------------------|-----------------|
+| 1.x             | `2.x`                  | `1.x` `2.x`     |
+| 2.x             | `3.x`                  | `3.x`           |           
+   
+
 ## 📦 Installation
 
 ```bash

@@ -1,5 +1,4 @@
-import { AxiosInstance } from 'axios';
-import { ConfirmationServiceMethods, DialogServiceMethods } from 'primevue';
+import { ConfirmationServiceMethods, DialogServiceMethods, ToastServiceMethods } from 'primevue';
 import { route as routeFn, RouteParams, Router } from 'ziggy-js';
 import { Formatters } from '../Composables';
 import Gate from '../Gate';
@@ -10,7 +9,6 @@ declare global {
 
     interface Window {
         route: typeof routeFn;
-        axios: AxiosInstance;
     }
 }
 

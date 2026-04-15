@@ -1,3 +1,13 @@
+export type FlashMessage = {
+    id: string;
+    severity: 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast';
+    summary?: string | undefined;
+    detail?: any | undefined;
+    closable?: boolean | undefined;
+    life?: number | undefined;
+    group?: string | undefined;
+};
+
 type Image = {
     alt?: string;
     url: string;
